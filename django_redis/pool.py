@@ -86,6 +86,12 @@ class ConnectionFactory(object):
                 "Socket connect timeout should be float or integer"
             kwargs["socket_connect_timeout"] = socket_connect_timeout
 
+        socket_keepalive = self.options.get("SOCKET_KEEPALIVE", None)
+        if socket_keepalive:
+            assert isinstance(socket_keepalive, (bool)), \
+                "Socket keepalive should be bool"
+            kwargs["socket_keepalive"] = socket_keepalive
+
         return kwargs
 
     def connect(self, url):
